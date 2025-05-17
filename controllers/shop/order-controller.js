@@ -3,6 +3,9 @@ const Order = require("../../models/Order");
 const Cart = require("../../models/Cart");
 const Product = require("../../models/Product");
 
+// Add this line at the top (use process.env or fallback to localhost)
+const BASE_URL = process.env.CLIENT_BASE_URL || "http://localhost:5173";
+
 const createOrder = async (req, res) => {
   try {
     const {
@@ -26,8 +29,8 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+        return_url: `${BASE_URL}/shop/paypal-return`,
+        cancel_url: `${BASE_URL}/shop/paypal-cancel`,
       },
       transactions: [
         {
